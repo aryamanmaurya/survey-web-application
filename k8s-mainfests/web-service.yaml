@@ -9,8 +9,8 @@ metadata:
     io.kompose.service: web
   name: web
 spec:
+  type: NodePort
   ports:
-  type: nodePort
     - name: "5000"
       port: 5000
       targetPort: 5000
