@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/data/db
+    path: /root/data/db
 
 ---
 apiVersion: v1
@@ -21,4 +21,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: /mnt/data/web
+    path: /root/data/web

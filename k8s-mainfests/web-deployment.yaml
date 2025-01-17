@@ -40,7 +40,7 @@ spec:
               value: 0.0.0.0
             - name: TZ
               value: Asia/Kolkata
-          image: aa:v3
+          image: aryamansam/survey-web-application:v1
           name: web
           ports:
             - containerPort: 5000
@@ -48,6 +48,7 @@ spec:
           volumeMounts:
             - mountPath: /usr/src/app
               name: web-claim0
+          workingDir: /usr/src/app
       restartPolicy: Always
       volumes:
         - name: web-claim0
