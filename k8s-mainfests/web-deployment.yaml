@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -o k8s-mainfests/
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: web
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: web
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -o k8s-mainfests/
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/app-network: "true"
+        io.kompose.service: web
+    spec:
+      containers:
+        - args:
+            - flask
+            - run
+          env:
+            - name: DATABASE_URL
+              value: mysql+pymysql://test:test%40123@db/users
+            - name: FLASK_APP
+              value: run.py
+            - name: FLASK_ENV
+              value: development
+            - name: FLASK_RUN_HOST
+              value: 0.0.0.0
+            - name: TZ
+              value: Asia/Kolkata
+          image: aa:v3
+          name: web
+          ports:
+            - containerPort: 5000
+          resources: {}
+          volumeMounts:
+            - mountPath: /usr/src/app
+              name: web-claim0
+      restartPolicy: Always
+      volumes:
+        - name: web-claim0
+          persistentVolumeClaim:
+            claimName: web-claim0
+status: {}
