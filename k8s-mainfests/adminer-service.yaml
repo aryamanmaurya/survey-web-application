@@ -8,7 +8,8 @@ metadata:
   labels:
     io.kompose.service: adminer
   name: adminer
-spec:
+spec
+  type: nodePort
   ports:
     - name: "8090"
       port: 8090
